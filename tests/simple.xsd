@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:annotation>
+        <xs:documentation>The MusicXML 4.0 DTD has no namespace, so for compatibility the MusicXML 4.0 XSD has no namespace either. Those who need to import the MusicXML XSD into another schema are advised to create a new version that uses "http://www.musicxml.org/xsd/MusicXML" as the namespace.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType name="above-below">
+        <xs:annotation>
+            <xs:documentation>The above-below type is used to indicate whether one element appears above or below another element.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="above"/>
+            <xs:enumeration value="below"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
