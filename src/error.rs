@@ -1,44 +1,18 @@
-use std::fmt;
+use std::fmt::{self, Display};
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Error {
-    pub kind: ErrorKind,
-}
+pub type Result<T> = std::result::Result<T, Error>;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-#[non_exhaustive]
-pub enum ErrorKind {
+#[derive(Debug)]
+pub enum Error {
+    Message(String),
     InvalidRootNode,
-    MissingNamespaceAttribute,
-    MissingNamespace
 }
 
-impl Error {
-    #[must_use]
-    pub fn kind(&self) -> &ErrorKind {
-        &self.kind
-    }
-
-    #[doc(hidden)]
-    pub fn __description(&self) -> &str {
-        match self.kind {
-            ErrorKind::InvalidRootNode => "The root node should be named 'schema'",
-            ErrorKind::MissingNamespaceAttribute => "Could not find an xmlns attribute",
-            ErrorKind::MissingNamespace => "Could not find an XML namespace",
+impl Display for Error {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Error::Message(msg) => formatter.write_str(msg),
+            Error::InvalidRootNode => formatter.write_str("invalid root node"),
         }
     }
-}
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        self.__description().fmt(f)
-    }
-}
-
-macro_rules! raise {
-    ($kind:expr) => {
-        return Err(crate::error::Error{
-            kind: $kind
-        })
-    };
 }
