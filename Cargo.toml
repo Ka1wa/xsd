@@ -1,0 +1,16 @@
+[package]
+name = "xsd"
+version = "0.1.0"
+authors = ["Jordy Ruiter <jordy.ruiter@gmail.com>"]
+edition = "2021"
+
+[[bin]]
+name = "xsdgen"
+path = "src/main.rs"
+
+[lib]
+name = "xsd"
+path = "src/lib.rs"
+
+[dependencies]
+roxmltree = "0.18.0"
