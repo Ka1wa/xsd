@@ -1,8 +1,8 @@
 use xsd::core::Xsd;
 
 #[test]
-fn it_adds_two() {
-    let xsd = Xsd::new(2, 2);
+fn xsd_loads() {
+    let xsd = Xsd::load("./tests/assets/simple.xsd");
 
-    assert_eq!(4, xsd.add());
+    assert!(xsd.is_ok());
 }
